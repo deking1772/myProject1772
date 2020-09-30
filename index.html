@@ -62,53 +62,13 @@
 
 
 <script>
-
     let todoItems = [];
-    onload = function() {
-        
 
-        if(sessionStorage.getItem('todos')) {
-            todoItems = JSON.parse(sessionStorage.getItem('todos'));
-
-            spreadData(todoItems);
-            console.log(todoItems);
-        } else {
-            todoItems = [];
-        }
-    }
-
-    function spreadData(dataList) {
-        let listDom = document.getElementById('listDom');
-
-        dataList.forEach(element => {
-            const node = document.createElement("li");
-            const isChecked = element.checked ? 'done' : '';
-            node.setAttribute('class', `todo-item ${isChecked}`);
-            node.setAttribute('data-key', element.id);
-            node.innerHTML = `
-                <input id="${element.id}" type="checkbox"/>
-              <label for="${element.id}" class="tick js-tick"></label>
-              <span>${element.text}</span>
-              <button class="delete-todo js-delete-todo">
-               <svg><use href="#delete-icon"></use></svg>
-               </button>`;
-
-
-            listDom.append(node);
-        });
-         
-
-    }
-
-   
     function renderTodo(todo) {
         const list = document.querySelector('.js-todo-list');
-        const item = document.querySelector(`[data-key='${todo.id}']`);
 
         const isChecked = todo.checked ? 'done' : '';
         const node = document.createElement("li");
-        
-
         node.setAttribute('class', `todo-item ${isChecked}`);
         node.setAttribute('data-key', todo.id);
         node.innerHTML = `
@@ -118,63 +78,34 @@
     <button class="delete-todo js-delete-todo">
     <svg><use href="#delete-icon"></use></svg>
     </button>
-        console.log(todo.id);
-        
   `;
-        console.log(node);
-        if (item) {
-            list.replaceChild(node, item);
-        } else {
-            list.append(node);
-        }
+
+        list.append(node);
     }
-    
-    function addTodo(text) { console.log('a');
+
+    function addTodo(text) {
         const todo = {
             text,
             checked: false,
             id: Date.now(),
         };
 
-        console.log(todo);
-
         todoItems.push(todo);
-        sessionStorage.setItem('todos',JSON.stringify(todoItems));
         renderTodo(todo);
     }
 
-    function toggleDone(key) {
-
-        const index = todoItems.findIndex(item => item.id === Number(key));
-        todoItems[index].checked = !todoItems[index].checked;
-        renderTodo(todoItems[index]);
-    }
-
-
     const form = document.querySelector('.js-form');
     form.addEventListener('submit', event => {
-        console.log('g');
         event.preventDefault();
         const input = document.querySelector('.js-todo-input');
 
         const text = input.value.trim();
-        console.log('d');
-        if (text !== '') {console.log('c');
-                    addTodo(text);
+        if (text !== '') {
+            addTodo(text);
             input.value = '';
             input.focus();
         }
     });
-
-    const list = document.querySelector('.js-todo-list');
-    list.addEventListener('click', event => {
-        if (event.target.classList.contains('js-tick')) {
-            const itemKey = event.target.parentElement.dataset.key;
-            toggleDone(itemKey);
-        }
-    });
-
-    //sessionStorage.setItem('todos', todoItems);
   
 </script>
 
