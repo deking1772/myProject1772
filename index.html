@@ -14,8 +14,7 @@
         <h1>first PR test</h1>
 
         <form class="js-form">
-            <input autofocus type="text" aria-label="Enter a new todo item" placeholder="E.g. Build a web app"
-                class="js-todo-input" id="readinglist">
+            <input autofocus type="text" aria-label="Enter a new todo item" placeholder="E.g. Build a web app" class="js-todo-input" id="readinglist">
             <button type="button" class="addBtn" id="enterBtn">Add</button>
         </form>
     </div>
@@ -67,7 +66,6 @@
 
     function renderTodo(todo) {
         const list = document.querySelector('.js-todo-list');
-
         const isChecked = todo.checked ? 'done' : '';
         const node = document.createElement("li");
         node.setAttribute('class', `todo-item ${isChecked}`);
@@ -78,15 +76,13 @@
     <span>${todo.text}</span>
     <button class="delete-todo js-delete-todo">
     <svg><use href="#delete-icon"></use></svg>
-    </button>
-  `;
+    </button> `;
 
         list.append(node);
     }
 
      //click이벤트 발생시 함수 실행.
         document.getElementById("enterBtn").addEventListener("click", function () {
-            console.log('f');
             let reading = document.getElementById("readinglist").value;
             reading && addTodo(reading);
             document.getElementById("readinglist").value = "";
