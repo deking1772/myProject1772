@@ -15,7 +15,8 @@
 
         <form class="js-form">
             <input autofocus type="text" aria-label="Enter a new todo item" placeholder="E.g. Build a web app"
-                class="js-todo-input">
+                class="js-todo-input" id="readinglist">
+            <button type="button" class="addBtn" id="enterBtn">Add</button>
         </form>
     </div>
 </main>
@@ -82,6 +83,18 @@
 
         list.append(node);
     }
+
+     //click이벤트 발생시 함수 실행.
+        document.getElementById("enterBtn").addEventListener("click", function () {
+            console.log('f');
+            let reading = document.getElementById("readinglist").value;
+            reading && addTodo(reading);
+            document.getElementById("readinglist").value = "";
+        })
+
+
+
+
 
     function addTodo(text) {
         const todo = {
