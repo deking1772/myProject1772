@@ -114,3 +114,16 @@ input[type="text"] {
   border-radius: 4px;
   border: 3px solid #333;
 }
+
+.addBtn {
+  padding: 10px;
+  width: 25%;
+  background: #d9d9d9;
+  color: #555;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
